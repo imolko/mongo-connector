@@ -6,9 +6,11 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ENV TZ America/Caracas
 
-ENV INDEX_NAME aurora
+# Especifica el sufijo  para los indices.
+ENV INDEX_NAME_SUFFIX "index"
 
-ENV CONFIG_TEMPLATES aurora
+# Especifica el template a cargar, por defecto se genera el template de aurora.
+ENV CONFIG_TEMPLATE "aurora"
 
 # instalamos mongo connector.
 RUN pip install mongo-connector[elastic5]==2.5.1 \
