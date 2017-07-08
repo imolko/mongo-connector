@@ -41,7 +41,7 @@
         },
         "aurora.irequests": {
             "rename": "irequests_${INDEX_NAME_SUFFIX}.master",
-            "excludeFields": ["internalData", "collectedDatas"]
+            "excludeFields": ["internalData", "activities"]
         }
     },
 
