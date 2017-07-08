@@ -8,7 +8,7 @@ fi
 
 # Si se especifica la variable de entorno NGINX_TEMPLATE,
 # entonces copia un conf, en el directorio conf.d
-if ! [ -z "${CONFIG_TEMPLATES}" ]; then
+if ! [ -z "${CONFIG_TEMPLATE}" ]; then
 
     merge_template () {
         # Merge template files and do variable substitution
@@ -37,14 +37,27 @@ if ! [ -z "${CONFIG_TEMPLATES}" ]; then
     }
 
     # Recorremos cada template que queramos instalar
-    for templ in ${CONFIG_TEMPLATES}; do
+    for templ in ${CONFIG_TEMPLATE}; do
         if [ ! -f /conf-templates/${templ}.json ]; then
             echo >&2 "Warning: !! El archivo template especificado no existe: /conf-templates/$templ.json"
             continue
         fi
 
         merge_template "/conf-templates/${templ}.json" > /conf.d/${templ}.json
+
+        # Copiamos el archivo ejecutable
+        if [ "${1}" = 'mongo-connector' ]; then
+            if [ -f /conf-templates/${templ}.sh ]; then
+                cp /conf-templates/${templ}.sh /conf.d/${templ}.sh
+                chmod +x /conf.d/${templ}.sh
+
+                # Ejecutamos el script.
+                source /conf.d/${templ}.sh
+            fi
+        fi
     done
+
+
 fi
 
 exec "$@"
