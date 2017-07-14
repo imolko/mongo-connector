@@ -128,3 +128,10 @@ curl -XPUT "imk-elastic5:9200/avatares_${INDEX_NAME_SUFFIX}?pretty" -H 'Content-
 
 '
 
+curl -XPOST "imk-elastic5:9200/_aliases?pretty" -H 'Content-Type: application/json' -d"
+{
+    \"actions\": [
+        { \"add\": { \"index\": \"avatares_${INDEX_NAME_SUFFIX}\", \"alias\": \"avatares\" }}
+    ]
+}
+"
