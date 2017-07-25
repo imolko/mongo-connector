@@ -35,13 +35,13 @@
         "local.*": false,
         "temp.*": false,
         "test.*": false,
-        "aurora.avatares": {
-            "rename": "avatares_${INDEX_NAME_SUFFIX}.master",
-            "excludeFields": ["actividades"]
-        },
         "aurora.irequests": {
             "rename": "irequests_${INDEX_NAME_SUFFIX}.master",
             "excludeFields": ["internalData", "activities"]
+        },
+        "aurora.avatares": {
+            "rename": "avatares_${INDEX_NAME_SUFFIX}.master",
+            "excludeFields": ["actividades"]
         }
     },
 

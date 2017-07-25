@@ -133,7 +133,9 @@ curl -XPOST "imk-elastic5:9200/_aliases?pretty" -H 'Content-Type: application/js
 {
     \"actions\": [
         { \"remove\": { \"index\": \"*\", \"alias\": \"avatares\" }},
-        { \"add\": { \"index\": \"avatares_${INDEX_NAME_SUFFIX}\", \"alias\": \"avatares\" }}
+        { \"add\": { \"index\": \"avatares_${INDEX_NAME_SUFFIX}\", \"alias\": \"avatares\" }},
+        { \"remove\": { \"index\": \"*\", \"alias\": \"irequests\" }},
+        { \"add\": { \"index\": \"irequests_${INDEX_NAME_SUFFIX}\", \"alias\": \"irequests\" }}
     ]
 }
 "
