@@ -2,7 +2,6 @@
     "__comment__1": "Configuration options starting with '__' are disabled",
     "__comment__2": "To enable them, remove the preceding '__'",
 
-
     "mainAddress": "mongodb://imk-mongodb1:27017,imk-mongodb2:27017,imk-mongodb3:27017/aurora?replicaSet=imolko-prod&readPreference=secondaryPreferred",
     "oplogFile": "/data/oplog.timestamp",
     "noDump": false,
