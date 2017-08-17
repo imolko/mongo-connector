@@ -128,12 +128,119 @@ curl -XPUT "imk-elastic5:9200/avatares_${INDEX_NAME_SUFFIX}?pretty" -H 'Content-
 
 '
 
+curl -XPUT "imk-elastic5:9200/irequests_${INDEX_NAME_SUFFIX}?pretty" -H 'Content-Type: application/json' -d'
+{
+	"mappings": {
+        "master": {
+            "dynamic": false,
+            "properties": {
+            	"adoptedAt" : {
+		            "type" : "date"
+				},
+				"closedAt" : {
+					"type" : "date"
+				},
+				"createdAt" : {
+					"type" : "date"
+				},
+				"slaAt" : {
+					"type" : "date"
+  				},
+				"owner" : {
+			        "type" : "keyword",
+			        "ignore_above" : 256
+				},
+				"adoptedBy" : {
+			        "type" : "keyword",
+			        "ignore_above" : 256
+				},
+				"closedBy" : {
+			        "type" : "keyword",
+			        "ignore_above" : 256
+				},
+				"createdBy" : {
+			        "type" : "keyword",
+			        "ignore_above" : 256
+				},
+				"avatarId" : {
+			        "type" : "keyword",
+			        "ignore_above" : 256
+				},
+				"mentions" : {
+			        "type" : "keyword",
+			        "ignore_above" : 256
+				},
+				"source" : {
+			        "type" : "keyword",
+			        "ignore_above" : 256
+				},
+				"sourceId" : {
+				    "type" : "keyword",
+				    "ignore_above" : 256
+				},
+				"status" : {
+				    "type" : "keyword",
+				    "ignore_above" : 256
+				},
+				"tags" : {
+				    "type" : "keyword",
+				    "ignore_above" : 256
+				},
+				"type" : {
+				    "type" : "keyword",
+				    "ignore_above" : 256
+				},
+				"label" : {
+				    "type" : "keyword",
+				    "ignore_above" : 256
+				},
+				"instructions" : {
+					"type" : "text",
+					"fields" : {
+						"keyword" : {
+							"type" : "keyword",
+							"ignore_above" : 256
+						}
+					}
+				},
+				"title" : {
+					"type" : "text",
+					"fields" : {
+						"keyword" : {
+							"type" : "keyword",
+							"ignore_above" : 256
+						}
+					}
+				},
+				"tasks" : {
+					"properties" : {
+                        "title" : {
+                            "type" : "text",
+                            "fields" : {
+                                "keyword" : {
+                                    "type" : "keyword",
+                                    "ignore_above" : 256
+                                }
+                            }
+                        }
+					}
+				}
+            }
+        }
+    }
+}
+
+'
+
+
 # Creamos el alias añadiendo el item creado.
 curl -XPOST "imk-elastic5:9200/_aliases?pretty" -H 'Content-Type: application/json' -d"
 {
     \"actions\": [
         { \"remove\": { \"index\": \"*\", \"alias\": \"avatares\" }},
-        { \"add\": { \"index\": \"avatares_${INDEX_NAME_SUFFIX}\", \"alias\": \"avatares\" }}
+        { \"add\": { \"index\": \"avatares_${INDEX_NAME_SUFFIX}\", \"alias\": \"avatares\" }},
+        { \"remove\": { \"index\": \"*\", \"alias\": \"irequests\" }},
+        { \"add\": { \"index\": \"irequests_${INDEX_NAME_SUFFIX}\", \"alias\": \"irequests\" }}
     ]
 }
 "
