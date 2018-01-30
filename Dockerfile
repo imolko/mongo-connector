@@ -13,7 +13,8 @@ ENV INDEX_NAME_SUFFIX "index"
 ENV CONFIG_TEMPLATE "aurora"
 
 # instalamos mongo connector.
-RUN pip install mongo-connector[elastic5]==2.5.1 \
+RUN apt-get update && apt-get install -y build-essential python-dev \
+    && pip install mongo-connector[elastic5]==2.5.1 \
     && pip install elastic2-doc-manager[elastic5]==0.3.0
 
 # creamos la carpeta para las configuraciones
